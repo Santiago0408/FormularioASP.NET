@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FormularioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tb_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nit" Type="nvarchar" MaxLength="100" />
+          <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="celular" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_formulario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="especialidad" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="años_experiencia" Type="nvarchar" MaxLength="10" />
+          <Property Name="salario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="fecha_envio" Type="datetime" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="celular" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="empresa_id" Type="int" />
+          <Property Name="persona_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="primer_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="segundo_nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="primer_apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="segundo_apellido" Type="nvarchar" MaxLength="100" />
+          <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="celular" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_formul__empre__145C0A3F">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="0..1" />
+          <End Role="tb_formulario" Type="Self.tb_formulario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_formulario">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_formul__perso__15502E78">
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="0..1" />
+          <End Role="tb_formulario" Type="Self.tb_formulario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_formulario">
+              <PropertyRef Name="persona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FormularioBDModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_formulario" EntityType="Self.tb_formulario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_formul__empre__145C0A3F" Association="Self.FK__tb_formul__empre__145C0A3F">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_formulario" EntitySet="tb_formulario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_formul__perso__15502E78" Association="Self.FK__tb_formul__perso__15502E78">
+            <End Role="tb_persona" EntitySet="tb_persona" />
+            <End Role="tb_formulario" EntitySet="tb_formulario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FormularioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tb_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_formulario" Relationship="Self.FK__tb_formul__empre__145C0A3F" FromRole="tb_empresa" ToRole="tb_formulario" />
+        </EntityType>
+        <EntityType Name="tb_formulario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="especialidad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="años_experiencia" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="salario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha_envio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="empresa_id" Type="Int32" />
+          <Property Name="persona_id" Type="Int32" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.FK__tb_formul__empre__145C0A3F" FromRole="tb_formulario" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_persona" Relationship="Self.FK__tb_formul__perso__15502E78" FromRole="tb_formulario" ToRole="tb_persona" />
+        </EntityType>
+        <EntityType Name="tb_persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="primer_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="primer_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_formulario" Relationship="Self.FK__tb_formul__perso__15502E78" FromRole="tb_persona" ToRole="tb_formulario" />
+        </EntityType>
+        <Association Name="FK__tb_formul__empre__145C0A3F">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="0..1" />
+          <End Role="tb_formulario" Type="Self.tb_formulario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_formulario">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_formul__perso__15502E78">
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="0..1" />
+          <End Role="tb_formulario" Type="Self.tb_formulario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_formulario">
+              <PropertyRef Name="persona_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FormularioBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" />
+          <EntitySet Name="tb_formulario" EntityType="Self.tb_formulario" />
+          <EntitySet Name="tb_persona" EntityType="Self.tb_persona" />
+          <AssociationSet Name="FK__tb_formul__empre__145C0A3F" Association="Self.FK__tb_formul__empre__145C0A3F">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_formulario" EntitySet="tb_formulario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_formul__perso__15502E78" Association="Self.FK__tb_formul__perso__15502E78">
+            <End Role="tb_persona" EntitySet="tb_persona" />
+            <End Role="tb_formulario" EntitySet="tb_formulario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FormularioBDModelStoreContainer" CdmEntityContainer="FormularioBDEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FormularioBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_empresa">
+            <EntityTypeMapping TypeName="FormularioBDModel.tb_empresa">
+              <MappingFragment StoreEntitySet="tb_empresa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_formulario">
+            <EntityTypeMapping TypeName="FormularioBDModel.tb_formulario">
+              <MappingFragment StoreEntitySet="tb_formulario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+                <ScalarProperty Name="años_experiencia" ColumnName="años_experiencia" />
+                <ScalarProperty Name="salario" ColumnName="salario" />
+                <ScalarProperty Name="fecha_envio" ColumnName="fecha_envio" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="persona_id" ColumnName="persona_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_persona">
+            <EntityTypeMapping TypeName="FormularioBDModel.tb_persona">
+              <MappingFragment StoreEntitySet="tb_persona">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+                <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

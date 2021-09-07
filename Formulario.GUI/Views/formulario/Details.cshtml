@@ -1,0 +1,90 @@
+﻿@model Formulario.GUI.ModeloBD.tb_formulario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_formulario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.especialidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especialidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.años_experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.años_experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_envio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_envio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_empresa.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_empresa.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_persona.primer_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_persona.primer_nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
